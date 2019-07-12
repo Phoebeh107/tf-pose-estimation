@@ -24,7 +24,7 @@ logger.addHandler(ch)
 
 fps_time = 0
 
-#
+# coordinates and their position on the body
 POSE_COCO_BODY_PARTS = {
     0: "Nose",
     1: "Neck",
@@ -108,7 +108,7 @@ if __name__ == '__main__':
             # That is, an arm is above their head.
             hail_taxi(image)
 
-            # Debugging statement: remove before demonstration.
+            # Debugging statement: remove before demonstration --> Prints the coordinates of the body part
             print([(POSE_COCO_BODY_PARTS[k], v.x, v.y) for k,v in human.body_parts.items()])
 
         # drawing lines on an image
