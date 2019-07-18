@@ -106,21 +106,26 @@ if __name__ == '__main__':
 
             # TODO ensure it only does this when someone is hailing a taxi.
             # That is, an arm is above their head.
-            for k,v in human.body_parts.items()
+            for k,v in human.body_parts.items():
                 #will creat list with ["body part name", y-coord]
                 body_part_coord=[POSE_COCO_BODY_PARTS[k], v.y] 
-                if k==4:
-                    r_wrist_yc = v.y
-                elif k==7
-                    l_wrist_yc = v.y
-                elif k==14
-                    r_eye_yc = v.y
-                elif k==15
-                    l_eye_yc = v.y
-                else:
-                    pass
-            while r_wrist_yc > r_eye_yc or l_wrist_yc > l_eye_rc:
-                hail_taxi(image)
+                try:
+                    k==4
+                    k==7
+                    k==0
+                    if k==4:
+                        r_wrist_yc = v.y
+                    elif k==7:
+                        l_wrist_yc = v.y
+                    elif k==0:
+                        nose_yc = v.y
+                    else:
+                        pass
+                    while r_wrist_yc > nose_yc or l_wrist_yc > nose_rc:
+                        hail_taxi(image)    
+                except:
+                    print("No hands or nose in picutre!")
+                
 
             # Debugging statement: remove before demonstration --> Prints the coordinates of the body part
             #print([(POSE_COCO_BODY_PARTS[k], v.x, v.y) for k,v in human.body_parts.items()])
