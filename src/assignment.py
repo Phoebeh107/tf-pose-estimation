@@ -106,10 +106,26 @@ if __name__ == '__main__':
 
             # TODO ensure it only does this when someone is hailing a taxi.
             # That is, an arm is above their head.
-            hail_taxi(image)
+            for k,v in human.body_parts.items()
+                #will creat list with ["body part name", y-coord]
+                body_part_coord=[POSE_COCO_BODY_PARTS[k], v.y] 
+                if k==4:
+                    r_wrist_yc = v.y
+                elif k==7
+                    l_wrist_yc = v.y
+                elif k==14
+                    r_eye_yc = v.y
+                elif k==15
+                    l_eye_yc = v.y
+                else:
+                    pass
+            while r_wrist_yc > r_eye_yc or l_wrist_yc > l_eye_rc:
+                hail_taxi(image)
 
             # Debugging statement: remove before demonstration --> Prints the coordinates of the body part
-            print([(POSE_COCO_BODY_PARTS[k], v.x, v.y) for k,v in human.body_parts.items()])
+            #print([(POSE_COCO_BODY_PARTS[k], v.x, v.y) for k,v in human.body_parts.items()])
+            
+
 
         # drawing lines on an image
         image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
