@@ -112,19 +112,20 @@ if __name__ == '__main__':
                 #will creat list with ["body part name", y-coord]
                 body_part_coord=[POSE_COCO_BODY_PARTS[k], v.y] 
                 #this is checking if the body parts are actually visbible to the camera and if not prints "No hands or nose in picutre!"
-                try:
-                    if k==4:
-                        #this is the right wrist - is found by dictionary key "4" and is now assigned the value of its y coordinate
-                        r_wrist_yc = v.y
-                    elif k==7:
-                        l_wrist_yc = v.y
-                    elif k==0:
-                        nose_yc = v.y
-                    #we are chekcing that the coordinate of the right or left wrist is higher than the nose to indicate the arm is waving/hailing a taxi    
-                except:
-                    print("No hands or nose in picutre!")
-            while r_wrist_yc < nose_yc or l_wrist_yc < nose_yc:
-                    hail_taxi(image)
+                
+                if k==4:
+                 #this is the right wrist - is found by dictionary key "4" and is now assigned the value of its y coordinate
+                    r_wrist_yc = v.y
+                elif k==7:
+                    l_wrist_yc = v.y
+                elif k==0:
+                    nose_yc = v.y
+                 #we are chekcing that the coordinate of the right or left wrist is higher than the nose to indicate the arm is waving/hailing a taxi    
+            if r_wrist_yc < nose_yc or l_wrist_yc < nose_yc:
+                hail_taxi(image)   
+            else:
+                print("No hands or nose in picutre!")
+           
                 
 
             # Debugging statement: remove before demonstration --> Prints the coordinates of the body part
