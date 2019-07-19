@@ -103,16 +103,16 @@ if __name__ == '__main__':
         # feed image into the neural network
         humans = e.inference(image)  # list of humans
         for id, human in enumerate(humans):
+            # TODO ensure it only does this when someone is hailing a taxi. That is, an arm is above their head.
+            #assigns a very large value to be replaced later on - the value is not at all near the replaceable values
             r_wrist_yc = 1000
             l_wrist_yc = 1000       
             nose_yc = 1000
-            # TODO ensure it only does this when someone is hailing a taxi.
-            # That is, an arm is above their head.
+            
             for k,v in human.body_parts.items():
-                #will creat list with ["body part name", y-coord]
-                body_part_coord=[POSE_COCO_BODY_PARTS[k], v.y]         
+                POSE_COCO_BODY_PARTS[k], v.y #gets the y-coordinate of the body part with ID key=k
                 if k==4:
-                 #this is the right wrist - is found by dictionary key "4" and is now assigned the value of its y coordinate
+                #this is the right wrist - is found by dictionary key "4" and is now assigned the value of its y coordinate
                     r_wrist_yc = v.y
                 elif k==7:
                     l_wrist_yc = v.y
