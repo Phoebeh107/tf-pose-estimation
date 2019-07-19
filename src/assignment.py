@@ -103,7 +103,9 @@ if __name__ == '__main__':
         # feed image into the neural network
         humans = e.inference(image)  # list of humans
         for id, human in enumerate(humans):
-
+            r_wrist_yc = 1000
+            l_wrist_yc = 1000       
+            nose_yc = 1000
             # TODO ensure it only does this when someone is hailing a taxi.
             # That is, an arm is above their head.
             for k,v in human.body_parts.items():
@@ -111,9 +113,6 @@ if __name__ == '__main__':
                 body_part_coord=[POSE_COCO_BODY_PARTS[k], v.y] 
                 #this is checking if the body parts are actually visbible to the camera and if not prints "No hands or nose in picutre!"
                 try:
-                    k==4
-                    k==7
-                    k==0
                     if k==4:
                         #this is the right wrist - is found by dictionary key "4" and is now assigned the value of its y coordinate
                         r_wrist_yc = v.y
@@ -121,13 +120,11 @@ if __name__ == '__main__':
                         l_wrist_yc = v.y
                     elif k==0:
                         nose_yc = v.y
-                    else:
-                        pass
-                    #we are chekcing that the coordinate of the right or left wrist is higher than the nose to indicate the arm is waving/hailing a taxi
-                    while r_wrist_yc > nose_yc or l_wrist_yc > nose_rc:
-                        hail_taxi(image)    
+                    #we are chekcing that the coordinate of the right or left wrist is higher than the nose to indicate the arm is waving/hailing a taxi    
                 except:
                     print("No hands or nose in picutre!")
+            while r_wrist_yc < nose_yc or l_wrist_yc < nose_yc:
+                    hail_taxi(image)
                 
 
             # Debugging statement: remove before demonstration --> Prints the coordinates of the body part
